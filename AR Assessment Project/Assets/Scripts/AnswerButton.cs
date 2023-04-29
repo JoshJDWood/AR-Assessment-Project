@@ -6,6 +6,7 @@ using TMPro;
 
 public class AnswerButton : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     private TMP_Text buttonText;
     private int currentInt;
 
@@ -18,5 +19,10 @@ public class AnswerButton : MonoBehaviour
     {
         currentInt = i;
         buttonText.text = "" + i;
+    }
+
+    public void CheckMyAnswer()
+    {
+        gameManager.CheckAnswer(currentInt);
     }
 }
