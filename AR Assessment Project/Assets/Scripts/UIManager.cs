@@ -18,18 +18,17 @@ public class UIManager : MonoBehaviour
         gameManager.ResumeGame();
     }
 
-    public void CorrectAnswerResponse()
+    public void Pause()
     {
-        checkAnswerResponse.text = "Well Done!";
-        checkAnswerResponse.color = Color.green;
-        fadeText = StartCoroutine(FadeResponse(1.5f, Color.green));
+        playButton.SetActive(true);
+        gameUI.SetActive(false);
     }
 
-    public void IncorrectAnswerResponse()
+    public void AnswerResponse(string response, Color color)
     {
-        checkAnswerResponse.text = "Try Again";
-        checkAnswerResponse.color = Color.grey;
-        fadeText = StartCoroutine(FadeResponse(1.5f, Color.grey));
+        checkAnswerResponse.text = response;
+        checkAnswerResponse.color = color;
+        fadeText = StartCoroutine(FadeResponse(1.5f, color));
     }
 
     IEnumerator FadeResponse(float duration, Color originalColor)

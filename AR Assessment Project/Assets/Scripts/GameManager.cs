@@ -22,14 +22,17 @@ public class GameManager : MonoBehaviour
         if (currentNumberObj != null)
         {
             Destroy(currentNumberObj);
-        }        
+        }
 
-        int i = Random.Range(0, remainingNumbers.Count);
-        currentNumberVal = remainingNumbers[i];
-        remainingNumbers.RemoveAt(i);
+        if (remainingNumbers.Count != 0)
+        {
+            int i = Random.Range(0, remainingNumbers.Count);
+            currentNumberVal = remainingNumbers[i];
+            remainingNumbers.RemoveAt(i);
 
-        currentNumberObj = Instantiate(numberPrefabs[currentNumberVal % 10], new Vector3(0,-0.1f,0.5f), Quaternion.identity);
-        AssignButtonVals();
+            currentNumberObj = Instantiate(numberPrefabs[currentNumberVal % 10], new Vector3(0, -0.1f, 0.5f), Quaternion.identity);
+            AssignButtonVals();
+        }
     }
 
     private void AssignButtonVals()
@@ -55,13 +58,34 @@ public class GameManager : MonoBehaviour
     {
         if (answer == currentNumberVal)
         {
-            SpawnNextRandomNumber();
-            uIManager.CorrectAnswerResponse();
+            if (remainingNumbers.Count != 0)
+            {
+                SpawnNextRandomNumber();
+                uIManager.AnswerResponse("Well Done!", Color.green);
+            }
+            else
+            {
+                uIManager.AnswerResponse("Well Done, you found all the numbers!", Color.green);
+                PrepareRestart();
+            }
         }
         else
         {
-            uIManager.IncorrectAnswerResponse();
+            uIManager.AnswerResponse( "Try Again", Color.grey);
         }
+    }
+
+    private void PrepareRestart()
+    {
+        Destroy(currentNumberObj);
+        remainingNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        StartCoroutine(DelayedPause(2));
+    }
+
+    IEnumerator DelayedPause(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        uIManager.Pause();
     }
 
     public void ResumeGame()
