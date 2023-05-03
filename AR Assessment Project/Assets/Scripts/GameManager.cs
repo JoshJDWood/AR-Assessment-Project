@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] numberPrefabs;
     [SerializeField] private AnswerButton[] answerButtons;
     [SerializeField] private UIManager uIManager;
+    [SerializeField] private AudioManager audioManager;
     private GameObject currentNumberObj = null;
     private int currentNumberVal;
     private List<int> remainingNumbers = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void SpawnNextRandomNumber()
+    public void SpawnNextRandomNumber(bool waitforWellDone)
     {
         if (currentNumberObj != null)
         {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
 
             currentNumberObj = Instantiate(numberPrefabs[currentNumberVal % 10], new Vector3(0, -0.1f, 0.5f), Quaternion.identity);
             StartCoroutine(SpinLetterIn(1, 2));
+            StartCoroutine(CanYouSayNumber(currentNumberVal, waitforWellDone));
             AssignButtonVals();
         }
     }
@@ -71,6 +73,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator CanYouSayNumber(int i, bool waitforWellDone)
+    {
+        if (waitforWellDone)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        audioManager.Play("Can You Say", 2);
+        yield return new WaitForSeconds(1f);
+        audioManager.Play("" + i, 1);
+    }
+
     public void CheckAnswer(int answer)
     {
         if (answer == currentNumberVal)
@@ -78,19 +91,22 @@ public class GameManager : MonoBehaviour
             if (remainingNumbers.Count != 0)
             {
                 uIManager.AddProgressTick(currentNumberVal);
-                SpawnNextRandomNumber();
+                SpawnNextRandomNumber(true);
                 uIManager.AnswerResponse("Well Done!", Color.green);
+                audioManager.Play("Well Done", 2);
             }
             else
             {
                 uIManager.AddProgressTick(currentNumberVal);
                 uIManager.AnswerResponse("Well Done, you found all the numbers!", Color.green);
+                audioManager.Play("Well Done", 2);
                 PrepareRestart();
             }
         }
         else
         {
             uIManager.AnswerResponse( "Try Again", Color.grey);
+            audioManager.Play("Try Again", 2);
         }
     }
 
@@ -113,7 +129,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentNumberObj == null)
         {
-            SpawnNextRandomNumber();
+            SpawnNextRandomNumber(false);
         }
     }
 }

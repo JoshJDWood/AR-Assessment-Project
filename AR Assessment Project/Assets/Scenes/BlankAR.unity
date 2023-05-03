@@ -457,6 +457,7 @@ MonoBehaviour:
   - {fileID: 974376437}
   - {fileID: 1666753792}
   uIManager: {fileID: 723616696}
+  audioManager: {fileID: 1797432397}
 --- !u!4 &722287518
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,6 +1330,7 @@ GameObject:
   - component: {fileID: 1354141929}
   - component: {fileID: 1354141928}
   - component: {fileID: 1354141927}
+  - component: {fileID: 1354141931}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: Untagged
@@ -1443,6 +1445,14 @@ Transform:
   m_Father: {fileID: 1659859599}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1354141931
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354141925}
+  m_Enabled: 1
 --- !u!1 &1362015552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,3 +2125,140 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1797432395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1797432396}
+  - component: {fileID: 1797432397}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1797432396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797432395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1797432397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797432395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b819aa1089c1b54c9a6a0509a3be16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberSounds:
+  - name: 1
+    clip: {fileID: 8300000, guid: 67ba337194781564b9d88bc7ac3b628f, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 2
+    clip: {fileID: 8300000, guid: c76848172bd1b254090df8609a0e1aea, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 3
+    clip: {fileID: 8300000, guid: 0ff38d314ecd51946afdb6641f80f618, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 4
+    clip: {fileID: 8300000, guid: 3d7d389abcb13e04394fae75f07633b6, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 5
+    clip: {fileID: 8300000, guid: 4d83d739aa098514d96705fa131ed08e, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 6
+    clip: {fileID: 8300000, guid: 99ec4d7cbf7d7eb4f8f54a8641ebbda2, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 7
+    clip: {fileID: 8300000, guid: 32cfd769e972b6949a9286ad30c7060d, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 8
+    clip: {fileID: 8300000, guid: d0fcc6f93115fd946ab0636e51e789c9, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 9
+    clip: {fileID: 8300000, guid: d8ae048a209d9e646acdf5a08b00261c, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: 10
+    clip: {fileID: 8300000, guid: 32f7d4b47f7dae2428d8259d19b68ab7, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  speachSounds:
+  - name: Can You Say
+    clip: {fileID: 8300000, guid: 284d5f29a2e3e034dae8018697f99949, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Well Done
+    clip: {fileID: 8300000, guid: 5840452723a8b8b4e87355edd53ece6b, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Try Again
+    clip: {fileID: 8300000, guid: da6ba9ad7246a36419cf738ddee9f0ac, type: 3}
+    volume: 1
+    pitch: 1
+    mute: 0
+    loop: 0
+    source: {fileID: 0}
