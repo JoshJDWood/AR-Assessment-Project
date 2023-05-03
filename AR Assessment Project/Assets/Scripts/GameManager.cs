@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
             remainingNumbers.RemoveAt(i);
 
             currentNumberObj = Instantiate(numberPrefabs[currentNumberVal % 10], new Vector3(0, -0.1f, 0.5f), Quaternion.identity);
+            StartCoroutine(SpinLetterIn(1, 2));
             AssignButtonVals();
         }
     }
@@ -54,17 +55,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator SpinLetterIn(float duration, float rotationCount)
+    {
+        yield return new WaitForFixedUpdate();
+        
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / duration)
+        {
+            if (currentNumberObj == null)
+            {
+                yield return null;
+            }
+            float rValue = Mathf.Lerp(0, 360 * rotationCount, t);
+            currentNumberObj.transform.rotation = Quaternion.Euler(0, rValue, 0);
+            yield return null;
+        }
+    }
+
     public void CheckAnswer(int answer)
     {
         if (answer == currentNumberVal)
         {
             if (remainingNumbers.Count != 0)
             {
+                uIManager.AddProgressTick(currentNumberVal);
                 SpawnNextRandomNumber();
                 uIManager.AnswerResponse("Well Done!", Color.green);
             }
             else
             {
+                uIManager.AddProgressTick(currentNumberVal);
                 uIManager.AnswerResponse("Well Done, you found all the numbers!", Color.green);
                 PrepareRestart();
             }
@@ -77,7 +96,7 @@ public class GameManager : MonoBehaviour
 
     private void PrepareRestart()
     {
-        Destroy(currentNumberObj);
+        
         remainingNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         StartCoroutine(DelayedPause(2));
     }
@@ -85,6 +104,8 @@ public class GameManager : MonoBehaviour
     IEnumerator DelayedPause(float delay)
     {
         yield return new WaitForSeconds(delay);
+        Destroy(currentNumberObj);
+        uIManager.ResetTickColors();
         uIManager.Pause();
     }
 
